@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulAge - Cognitive Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>MindfulAge</h1>
+    </header>
+
+    <nav>
+        <a href="#welcome" class="nav-link" data-page="welcome-page">Home</a>
+        <a href="#questionnaire" class="nav-link" data-page="questionnaire-page">Questionnaire</a>
+        <a href="#puzzles" class="nav-link" data-page="puzzles-page">Puzzles</a>
+        <a href="#ai-conversation" class="nav-link" data-page="ai-page">AI Conversation</a>
+        <a href="#results" class="nav-link" data-page="results-page">Results</a>
+    </nav>
+
+    <main>
+        <div id="welcome-page" class="page">
+            <h2>Welcome</h2>
+            <p>This tool helps you assess your cognitive health. This is not a diagnostic tool and all results should be discussed with a medical professional.</p>
+        </div>
+
+        <div id="questionnaire-page" class="page hidden">
+            <h2>Questionnaire</h2>
+            <p id="question-text"></p>
+            <div class="question-options">
+                <button class="answer-button" data-score="3">Yes</button>
+                <button class="answer-button" data-score="1">No</button>
+            </div>
+            <p id="question-status"></p>
+        </div>
+
+        <div id="puzzles-page" class="page hidden">
+            <h2>Cognitive Puzzles</h2>
+            <p id="puzzle-instructions"></p>
+            <div id="puzzle-content">
+                <p id="word-list"></p>
+                <textarea id="user-words" placeholder="Type the words you remember, separated by a comma." rows="4"></textarea>
+                <button id="submit-words">Submit</button>
+            </div>
+        </div>
+
+        <div id="ai-page" class="page hidden">
+    <h2>Chat with the AI</h2>
+    <div id="chat-box">
+        <div class="message-container">
+            <p class="ai-message">Hello! I'm here to talk. How can I help?</p>
+        </div>
+    </div>
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Type your message here...">
+        <button id="send-button">Send</button>
+		</div>
+	</div>
+
+        <div id="results-page" class="page hidden">
+            <h2>Results</h2>
+            <p id="result-text"></p>
+            <p id="recommendations-text"></p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
