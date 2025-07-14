@@ -101,44 +101,41 @@ function addMessage(sender, message) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+// This function replaces the old, simulated sendToAPI function
 function sendToAPI(message) {
     addMessage('ai', 'Thinking...');
-    setTimeout(() => {
-        const simulatedResponses = [
-            "That's interesting. Can you tell me more about that?",
-            "I understand. What do you think about that?",
-            "Thank you for sharing. My analysis is complete.",
-        ];
-        const simulatedResponse = simulatedResponses[Math.floor(Math.random() * simulatedResponses.length)];
-        
+    
+    // Make a real fetch request to your backend server
+    fetch('http://127.0.0.1:5000/api/chatbot', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(response => {
+        // Check if the response was successful
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Remove the "Thinking..." message
         const thinkingMessage = document.querySelector('.ai-message:last-child');
         if (thinkingMessage && thinkingMessage.textContent === 'Thinking...') {
-            thinkingMessage.textContent = simulatedResponse;
-        } else {
-            addMessage('ai', simulatedResponse);
+            thinkingMessage.remove();
         }
 
-        state.aiScore = Math.floor(Math.random() * 10) + 1;
-        
-        if (simulatedResponse.includes("analysis is complete")) {
-            userInput.disabled = true;
-            sendButton.disabled = true;
-            state.aiCompleted = true;
-        }
-    }, 2000);
-}
-
-function showResults() {
-    const riskLevel = calculateRiskLevel();
-    resultText.textContent = `Your risk level is: ${riskLevel}`;
-
-    if (riskLevel === 'High Risk') {
-        recommendationsText.textContent = "Based on the assessment, it is strongly recommended that you consult with a medical professional for a formal diagnosis and care plan. This is not a diagnostic tool.";
-    } else if (riskLevel === 'Medium Risk') {
-        recommendationsText.textContent = "Your results show some risk factors. Consider discussing these results with a medical professional and engaging in activities that support cognitive health, such as exercise and brain training.";
-    } else {
-        recommendationsText.textContent = "Your results indicate a low risk level. Continue to maintain a healthy lifestyle and discuss any concerns with a medical professional. This is not a diagnostic tool.";
-    }
+        // Add the real AI response and update the score
+        addMessage('ai', data.response);
+        state.aiScore = data.score;
+    })
+    .catch(error => {
+        // Handle any errors that occur
+        console.error('Error connecting to the server:', error);
+        addMessage('ai', 'Error: Could not connect to the server.');
+    });
 }
 
 // --- Event Listeners ---
@@ -153,7 +150,6 @@ navLinks.forEach(link => {
         } else if (pageId === 'puzzles-page') {
             startPuzzles();
         } else if (pageId === 'ai-page') {
-            // Re-initialize AI chat state when navigating
             userInput.disabled = false;
             sendButton.disabled = false;
         } else if (pageId === 'results-page') {
