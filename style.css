@@ -5,72 +5,93 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef2f5; /* Lighter background */
+    background-color: #eef2f5;
     color: #333;
     margin: 0;
-    padding-top: 80px; /* Space for the fixed header/nav */
+    display: flex;
+    height: 100vh;
     line-height: 1.6;
+    overflow: hidden;
 }
 
-header {
-    background-color: #2c3e50; /* Darker header */
+/* --- Sidebar --- */
+.sidebar {
+    width: 220px;
+    background-color: #2c3e50;
     color: #ecf0f1;
-    text-align: center;
-    padding: 15px 0;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1001; /* Above nav */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    transition: transform 0.3s ease;
+    z-index: 1000;
 }
 
-h1 {
-    margin: 0;
-    font-size: 2.2em;
-    letter-spacing: 1px;
+.sidebar h1 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0 10px;
 }
 
-/* --- Navigation Bar --- */
 .main-nav {
     display: flex;
-    justify-content: center;
-    background-color: #34495e; /* Slightly lighter than header */
-    position: fixed;
-    top: 65px; /* Directly below header */
+    flex-direction: column;
     width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 5px 0; /* Smaller padding for nav */
+    align-items: center;
 }
 
 .nav-link {
+    width: 80%;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: #34495e;
     color: #ecf0f1;
-    padding: 10px 18px; /* Refined padding */
+    padding: 12px;
     text-decoration: none;
+    border-radius: 6px;
     font-weight: bold;
     font-size: 0.95em;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    border-radius: 5px; /* Slightly rounded corners */
-    margin: 0 5px; /* Spacing between links */
 }
 
 .nav-link:hover {
-    background-color: #4a6784; /* Lighter hover */
-    transform: translateY(-2px); /* Subtle lift effect */
+    background-color: #1abc9c;
+    transform: translateX(5px);
 }
 
-/* --- Main Content Area --- */
+/* --- Hamburger Button --- */
+#menu-toggle {
+    display: none;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    z-index: 1100;
+    cursor: pointer;
+}
+
+/* --- App Container --- */
 .app-container {
-    background-color: #ffffff;
-    padding: 2.5em; /* More padding */
-    border-radius: 10px; /* More rounded corners */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
-    width: 90%;
-    max-width: 700px; /* Slightly wider */
-    margin: 30px auto; /* More margin from top/bottom */
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    padding: 40px;
+    overflow-y: auto;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.3s ease;
 }
 
+/* --- Page Content --- */
 .page {
     text-align: center;
 }
@@ -83,7 +104,7 @@ h2 {
     color: #34495e;
     font-size: 1.8em;
     margin-bottom: 1.2em;
-    border-bottom: 2px solid #ddd; /* Subtle separator */
+    border-bottom: 2px solid #ddd;
     padding-bottom: 0.5em;
 }
 
@@ -92,7 +113,7 @@ p {
     margin-bottom: 1em;
 }
 
-/* --- Card Style for sections --- */
+/* --- Cards --- */
 .card {
     background-color: #f9f9f9;
     border: 1px solid #eee;
@@ -107,8 +128,8 @@ button {
     background-color: #3498db;
     color: #fff;
     border: none;
-    padding: 12px 25px; /* Larger buttons */
-    border-radius: 6px; /* More rounded */
+    padding: 12px 25px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1em;
     margin-top: 15px;
@@ -128,13 +149,13 @@ button:active {
 
 .question-options button {
     margin: 0 10px;
-    min-width: 100px; /* Ensure consistent button size */
+    min-width: 100px;
 }
 
-/* --- Text Inputs and Textareas --- */
+/* --- Inputs --- */
 #user-words,
 #user-input {
-    width: calc(100% - 20px); /* Adjust for padding */
+    width: calc(100% - 20px);
     padding: 12px;
     border-radius: 6px;
     border: 1px solid #ccc;
@@ -150,7 +171,7 @@ button:active {
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
-/* --- Specific Text Styles --- */
+/* --- Text Styling --- */
 .status-text {
     font-style: italic;
     color: #666;
@@ -161,20 +182,19 @@ button:active {
 .highlight-text {
     font-size: 1.6em;
     font-weight: 600;
-    color: #e74c3c; /* A strong accent color */
+    color: #e74c3c;
     margin-bottom: 20px;
     padding: 10px 0;
     border-bottom: 1px dashed #f0f0f0;
     border-top: 1px dashed #f0f0f0;
 }
 
-
-/* --- Chatbot Specific Styles --- */
+/* --- Chat --- */
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 450px; /* Increased height */
-    padding: 0; /* Remove internal padding, as chat-box has its own */
+    height: 450px;
+    padding: 0;
 }
 
 #chat-box {
@@ -203,34 +223,59 @@ button:active {
 }
 
 .user-message {
-    background-color: #d1ecf1; /* Light blue */
+    background-color: #d1ecf1;
     color: #1a4f6d;
-    margin-left: auto; /* Aligns to right */
-    border-bottom-right-radius: 3px; /* "Tail" effect */
+    margin-left: auto;
+    border-bottom-right-radius: 3px;
 }
 
 .ai-message {
-    background-color: #e9ecef; /* Light gray */
+    background-color: #e9ecef;
     color: #495057;
-    margin-right: auto; /* Aligns to left */
-    border-bottom-left-radius: 3px; /* "Tail" effect */
+    margin-right: auto;
+    border-bottom-left-radius: 3px;
 }
 
 #input-container {
     display: flex;
-    gap: 10px; /* Space between input and button */
-    padding: 10px; /* Padding inside the input container */
-    background-color: #f0f0f0; /* Slight background for input area */
+    gap: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
     border-radius: 8px;
-    margin-top: auto; /* Push to bottom if chat-box is full height */
+    margin-top: auto;
 }
 
 #user-input {
     flex-grow: 1;
-    margin-top: 0; /* Override default button margin */
+    margin-top: 0;
 }
 
 #send-button {
-    margin-top: 0; /* Override default button margin */
-    padding: 10px 20px; /* Adjust button padding */
+    margin-top: 0;
+    padding: 10px 20px;
+}
+
+/* --- Responsive (Mobile < 768px) --- */
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .app-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
 }

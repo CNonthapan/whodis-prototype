@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>WhoDis - Cognitive Assessment</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <header>
+    <!-- Hamburger Menu (Mobile only) -->
+    <button id="menu-toggle">&#9776;</button>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
         <h1>WhoDis</h1>
-    </header>
+        <nav class="main-nav">
+            <a href="#welcome" class="nav-link" data-page="welcome-page">Home</a>
+            <a href="#questionnaire" class="nav-link" data-page="questionnaire-page">Questionnaire</a>
+            <a href="#puzzles" class="nav-link" data-page="puzzles-page">Puzzles</a>
+            <a href="#ai-conversation" class="nav-link" data-page="ai-page">AI Chat</a>
+            <a href="#results" class="nav-link" data-page="results-page">Results</a>
+        </nav>
+    </div>
 
-    <nav class="main-nav">
-        <a href="#welcome" class="nav-link" data-page="welcome-page">Home</a>
-        <a href="#questionnaire" class="nav-link" data-page="questionnaire-page">Questionnaire</a>
-        <a href="#puzzles" class="nav-link" data-page="puzzles-page">Puzzles</a>
-        <a href="#ai-conversation" class="nav-link" data-page="ai-page">AI Chat</a>
-        <a href="#results" class="nav-link" data-page="results-page">Results</a>
-    </nav>
-
+    <!-- Main Application Container -->
     <main class="app-container">
         <div id="welcome-page" class="page">
             <h2>Welcome to WhoDis</h2>
@@ -59,7 +63,7 @@
                     </div>
                 </div>
                 <div id="input-container">
-                    <input type="text" id="user-input" placeholder="Type your message here...">
+                    <input type="text" id="user-input" placeholder="Type your message here..." />
                     <button id="send-button">Send</button>
                 </div>
             </div>
@@ -74,6 +78,18 @@
         </div>
     </main>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Toggle Sidebar for Mobile
+        const toggleBtn = document.getElementById('menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const body = document.body;
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+    </script>
 </body>
 </html>
