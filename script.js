@@ -106,7 +106,7 @@ function sendToAPI(message) {
     addMessage('ai', 'Thinking...');
     
     // Make a real fetch request to your backend server
-    fetch('https://whodis-prototype.onrender.com', {
+    fetch('http://127.0.0.1:5000/api/chatbot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
