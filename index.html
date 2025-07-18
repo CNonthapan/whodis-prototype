@@ -12,57 +12,65 @@
         <h1>WhoDis</h1>
     </header>
 
-    <nav>
+    <nav class="main-nav">
         <a href="#welcome" class="nav-link" data-page="welcome-page">Home</a>
         <a href="#questionnaire" class="nav-link" data-page="questionnaire-page">Questionnaire</a>
         <a href="#puzzles" class="nav-link" data-page="puzzles-page">Puzzles</a>
-        <a href="#ai-conversation" class="nav-link" data-page="ai-page">AI Conversation</a>
+        <a href="#ai-conversation" class="nav-link" data-page="ai-page">AI Chat</a>
         <a href="#results" class="nav-link" data-page="results-page">Results</a>
     </nav>
 
-    <main>
+    <main class="app-container">
         <div id="welcome-page" class="page">
-            <h2>Welcome</h2>
-            <p>This tool helps you assess your cognitive health. This is not a diagnostic tool and all results should be discussed with a medical professional.</p>
+            <h2>Welcome to WhoDis</h2>
+            <p>This tool helps you assess your cognitive health. Please remember, this is not a diagnostic tool, and all results should be discussed with a medical professional.</p>
         </div>
 
         <div id="questionnaire-page" class="page hidden">
             <h2>Questionnaire</h2>
-            <p id="question-text"></p>
-            <div class="question-options">
-                <button class="answer-button" data-score="3">Yes</button>
-                <button class="answer-button" data-score="1">No</button>
+            <div class="card">
+                <p id="question-text"></p>
+                <div class="question-options">
+                    <button class="answer-button" data-score="3">Yes</button>
+                    <button class="answer-button" data-score="1">No</button>
+                </div>
+                <p id="question-status" class="status-text"></p>
             </div>
-            <p id="question-status"></p>
         </div>
 
         <div id="puzzles-page" class="page hidden">
             <h2>Cognitive Puzzles</h2>
-            <p id="puzzle-instructions"></p>
-            <div id="puzzle-content">
-                <p id="word-list"></p>
-                <textarea id="user-words" placeholder="Type the words you remember, separated by a comma." rows="4"></textarea>
-                <button id="submit-words">Submit</button>
+            <div class="card">
+                <p id="puzzle-instructions"></p>
+                <div id="puzzle-content">
+                    <p id="word-list" class="highlight-text"></p>
+                    <textarea id="user-words" placeholder="Type the words you remember, separated by a comma." rows="4"></textarea>
+                    <button id="submit-words">Submit Words</button>
+                </div>
             </div>
         </div>
 
         <div id="ai-page" class="page hidden">
             <h2>Chat with the AI</h2>
-            <div id="chat-box">
-                <div class="message-container">
-                    <p class="ai-message">Hello! I'm here to talk. How can I help?</p>
+            <div class="chat-container card">
+                <div id="chat-box">
+                    <div class="message-container">
+                        <p class="ai-message">Hello! I'm here to talk. How can I help?</p>
+                    </div>
                 </div>
-            </div>
-            <div id="input-container">
-                <input type="text" id="user-input" placeholder="Type your message here...">
-                <button id="send-button">Send</button>
+                <div id="input-container">
+                    <input type="text" id="user-input" placeholder="Type your message here...">
+                    <button id="send-button">Send</button>
+                </div>
             </div>
         </div>
 
         <div id="results-page" class="page hidden">
-            <h2>Results</h2>
-            <p id="result-text"></p>
-            <p id="recommendations-text"></p>
+            <h2>Your Results</h2>
+            <div class="card">
+                <p id="result-text" class="highlight-text"></p>
+                <p id="recommendations-text"></p>
+            </div>
         </div>
     </main>
 
